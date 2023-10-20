@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title> PuppyBlog - {% block title %}{% endblock %}</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js"
+        integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- Navigator -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+        <a class="navbar-brand" href="{{url_for('core.index')}}">PuppyBlog</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('core.info')}}">About Us</a>
+                </li>
+                <!-- If Logged -->
+                {% if current_user.is_authenticated %}
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('blog_posts.create')}}">Create Post</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('users.logout')}}">Log Out</a>
+                </li>
+                <!-- <li class="nav-item active align-self-end"></li>
+                    <a class="nav-link" href="{{url_for('users.account')}}">{{ current_user.username }}</a>
+                </li> -->
+                <!-- If NOT Logged -->
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link " href="{{url_for('users.login')}}">Log In</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('users.register')}}">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+            <ul class="navbar-nav  mt-2 mt-lg-0" style="margin-right: 40px;">
+                <li class="nav-item active" >
+                    <a class="nav-link h5 mb-0" href="{{url_for('users.account')}}"><strong>{{ current_user.username }}</strong></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Flash Messages -->
+    {% for alert in get_flashed_messages(with_categories= True) %}
+    {% if alert[0] == "success" %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong><i class="fa fa-check" aria-hidden="true"></i> Success! </strong> {{ alert[1] }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% elif alert[0] == "warning" %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong><i class="fas fa-wind-warning"></i> Something went wrong! </strong> {{ alert[1] }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% elif alert[0] == "danger" %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong><i class="fas fa-diagnoses    "></i> Error! </strong> {{ alert[1] }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% else %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <strong>Info: </strong> {{ alert[1] }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

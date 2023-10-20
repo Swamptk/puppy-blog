@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}
+Update Account
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-3">Update Acount</h1>
+        <p class="lead">Change your account information.</p>
+        <hr class="my-2">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    {{ form.email(class="form-control", placeholder = "Email") }}
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
+                        {{ form.username(class="form-control", placeholder = "username") }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <div class="custom-file">
+                        {{ form.picture(class="custom-file-input") }}
+                        {{ form.picture.label(class="custom-file-label", text=form.picture.data ) }}
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <p class="lead">
+                        {{ form.submit(class="btn btn-primary btn-lg") }}
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

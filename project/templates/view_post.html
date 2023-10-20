@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ post.title }}
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">{{post.title}}</h1>
+        <div>
+            <p class="lead">Written by <a href="{{url_for('users.posts', username=author.username)}}">
+                    @{{ author.username}}
+                </a></p>
+            <p>Created at {{ post.created_at.strftime('%a %d %b %Y') }}</p>
+        </div>
+        {% if author == current_user %}
+        <div>
+            <a class="btn btn-primary" href="{{url_for('blog_posts.update', blog_post_id = post.id)}}"
+                role="button">Edit</a>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletePostModal">
+                Delete
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="deletePostModal" tabindex="-1" role="dialog" aria-labelledby="Delete Post"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Delete Post</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                Are you sure that you want to delete this post?
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-danger" href="{{url_for('blog_posts.delete', blog_post_id=post.id)}}" role="button">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                $('#exampleModal').on('show.bs.modal', event => {
+                    var button = $(event.relatedTarget);
+                    var modal = $(this);
+                    // Use above variables to manipulate the DOM
+
+                });
+            </script>
+        </div>
+        {% endif %}
+        <hr class="my-2">
+        <p>{{ post.text }}</p>
+    </div>
+</div>
+{% endblock %}

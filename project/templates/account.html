@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}
+Account
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron text-center">
+        <img src="{{profile_img}}" alt="Profile Image" width="200px" height="200px">
+        <div class="card-body">
+            <h4 class="card-title">@{{user.username}}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Member since {{ user.created_at.date() }}</h6>
+            <p class="card-text">{{user.email}}</p>
+            <a href="/{{user.username}}" class="card-link">User Posts</a>
+            <a href="{{url_for('users.update')}}" class="card-link">Update Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
