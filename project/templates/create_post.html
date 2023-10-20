@@ -3,25 +3,25 @@
 Create Post
 {% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="jumbotron">
-            <h1 class="display-4">Post Editor.</h1>
-            <hr class="my-2">
-            <div class="container">
-                <form action="" method="post">
-                    {{ form.hidden_tag() }}
-                    <div class="form-group">
-                        {{ form.title(class="form-control form-control-lg", placeholder="Title") }}
-                    </div>
-                    <hr>
-                    <div class="form-group">
-                        {{ form.text(class="form-control form-control-lg", placeholder="Post content.") }}
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Post</button>
-                    </div>
-                </form>
-            </div>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Post Editor.</h1>
+        <hr class="my-2">
+        <div class="container">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.title(class="form-control form-control-lg", placeholder="Title") }}
+                </div>
+                <hr>
+                <div class="form-group">
+                    {{ form.text(class="form-control form-control-lg", placeholder="Post content.", rows="5") }}
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 {% endblock %}

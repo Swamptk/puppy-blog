@@ -4,63 +4,67 @@
 {% endblock %}
 {% block content %}
 <div class="container">
-    <div class="jumbotron text-center">
+    <div class="jumbotron text-center" style="padding-bottom: 3rem;">
         <h1 class="display-4">@{{ user.username }}'s Posts</h1>
         <img src="{{ url_for('static', filename= 'profile_imgs/' + user.profile_img) }}" alt="Profile Image">
-        <hr class="my-2">
     </div>
 </div>
 
-{% for post in posts.items %}
-<div class="container">
-    <div class="jumbotron">
+<!-- Posts -->
+<div class="card container" style="width: 75%;">
+  {% for post in posts.items%}
+  <div class="card-body " style="margin-bottom: 10px; padding-top: 30px; padding-bottom: 20px;">
+    <div style="display: flex; justify-content: space-between;">
+      <div>
         <h4><a href="{{url_for('blog_posts.view', blog_post_id = post.id)}}">{{post.title}}</a></h4>
         <p class="lead">By <a href="{{url_for('users.posts', username = post.author.username)}}">
-                @{{ post.author.username }}
-            </a>
+            @{{ post.author.username }}
+          </a>
         </p>
         <p class="text-muted">Created at {{ post.created_at.strftime('%a %d %b %Y') }}.</p>
-        <hr class="my-2">
-        <p>{{ post.text }}</p>
+      </div>
+      <div>
+        <img style="height: 100px; width: auto;" src="{{url_for('static', filename='profile_imgs/'+post.author.profile_img)}}" alt="Profile Image">
+      </div>
     </div>
+    <hr class="my-2">
+    <p>{{ post.text }}</p>
+  </div>
+  {% endfor %}
 </div>
-<br>
-{% endfor %}
-<nav aria-label="Posts navigation">
-    <ul class="pagination justify-content-center">
-        {% if posts.has_prev %}
-        <li class="page-item">
-            {% else %}
-        <li class="page-item disabled">
-            {% endif %}
-            <a class="page-link" href="{{url_for('users.posts', username=user.username, page=posts.page-1)}}"
-                aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-        {% if posts.page == page_num %}
-        <li class="page-item active disabled" aria-current="page">
-            <a class="page-link" href="{{url_for('users.posts', username=user.username, page=page_num)}}">
-                {{ page_num }}</a>
-        </li>
-        {% else %}
-        <li class="page-item" aria-current="page">
-            <a class="page-link" href="{{url_for('users.posts', username=user.username, page=page_num)}}">
-                {{ page_num }}</a>
-        </li>
-        {% endif %}
-        {% endfor %}
-        {% if posts.has_next %}
-        <li class="page-item">
-            {% else %}
-        <li class="page-item disabled">
-            {% endif %}
-            <a class="page-link" href="{{url_for('users.posts', username=user.username, page=posts.page+1)}}"
-                aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
+
+<!-- Paginator -->
+<nav aria-label="Page navigation">
+  <ul class="pagination justify-content-center">
+    {% if posts.has_prev %}
+    <li class="page-item">
+      {% else %}
+    <li class="page-item disabled">
+      {% endif %}
+      <a class="page-link" href="{{url_for('core.index', page=posts.page - 1)}}" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num == posts.page %}
+    <li class="page-item disabled">
+      {% else %}
+    <li class="page-item">
+      {% endif %}
+      <a class="page-link" href="{{url_for('core.index', page=page_num)}}">{{page_num}}</a>
+    </li>
+    {% endfor %}
+    {% if posts.has_next %}
+    <li class="page-item">
+      {% else %}
+    <li class="page-item disabled">
+      {% endif %}
+      <a class="page-link" href="{{url_for('core.index', page=posts.page + 1)}}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
 </nav>
 {% endblock %}
