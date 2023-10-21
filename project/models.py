@@ -60,3 +60,11 @@ class BlogPost(TimedBase):
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}: Title: {self.title} | Created at: {self.created_at}\n{self.text}"
     
+    def json(self):
+        return {
+            "author": self.author.username,
+            "author_id": self.user_id,
+            "title": self.title,
+            "text": self.text.strip(),
+        }
+    

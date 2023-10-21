@@ -1,5 +1,6 @@
 import os
 from sqlalchemy.orm import declarative_base
+from flask_restful import Api
 from flask import Flask
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -36,6 +37,11 @@ app.register_blueprint(core)
 app.register_blueprint(users)
 app.register_blueprint(blog_posts)
 app.register_blueprint(error_pages)
+
+##### API
+from project.api import UserPostsApi
+api = Api(app)
+api.add_resource(UserPostsApi, "/api/getuserposts/<username>")
 
 ##### Create DB
 with app.app_context():
