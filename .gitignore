@@ -1,6 +1,5 @@
 **/.vscode
 **/__pycache__
 crud.ipynb
+**/static/profile_imgs/*.jpg
 project/database.db
-project/database.db
-static/profile_imgs/**
