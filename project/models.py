@@ -63,6 +63,7 @@ class BlogPost(TimedBase):
     def json(self):
         return {
             "author": self.author.username,
+            "created_at": self.created_at,
             "author_id": self.user_id,
             "title": self.title,
             "text": self.text.strip(),
