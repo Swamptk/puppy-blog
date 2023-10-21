@@ -2,3 +2,5 @@
 **/__pycache__
 crud.ipynb
 project/database.db
+project/database.db
+static/profile_imgs/**
