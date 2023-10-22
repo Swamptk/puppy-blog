@@ -21,7 +21,7 @@ def create():
     form = BlogPostForm()
     if form.validate_on_submit():
         blog_post = BlogPost(
-            title=form.title.data, text=form.text.data, user_id=current_user.id
+            title=form.title.data, text=form.text.data, user_id=current_user.id # type: ignore
         )
         with app.app_context():
             db.session.add(blog_post)
@@ -45,13 +45,13 @@ def update(blog_post_id):
     with app.app_context():
         blog_post: BlogPost = BlogPost.query.get_or_404(blog_post_id, "Post not found.")
         author = blog_post.author
-        if author.id != current_user.id:
+        if author.id != current_user.id: # type: ignore
             flash("Only the author can edit the post.", "danger")
             abort(403)
         form = BlogPostForm()
         if form.validate_on_submit():
-            blog_post.title = form.title.data
-            blog_post.text = form.text.data
+            blog_post.title = form.title.data # type: ignore
+            blog_post.text = form.text.data # type: ignore
             db.session.commit()
             flash("Blog post updated successfully.", "success")
             return redirect(url_for("blog_posts.view", blog_post_id=blog_post_id))
@@ -67,7 +67,7 @@ def delete(blog_post_id):
     with app.app_context():
         blog_post: BlogPost = BlogPost.query.get_or_404(blog_post_id, "Post not found.")
         author = blog_post.author
-        if author.id != current_user.id:
+        if author.id != current_user.id: # type: ignore
             flash("Only the author can delete the post.", "danger")
             abort(403)
         db.session.delete(blog_post)

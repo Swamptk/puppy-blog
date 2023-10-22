@@ -61,7 +61,6 @@ def login():
                 next = url_for("core.index")
             return redirect(next)
         else:
-            # form.password.data = ""
             flash("Invalid password.", "danger")
             return render_template("login.html", form=form)
     return render_template("login.html", form=form)
@@ -70,7 +69,7 @@ def login():
 @users.route("/acount")
 @login_required
 def account():
-    user: User = current_user
+    user: User = current_user # type: ignore
     profile_img = url_for("static", filename="profile_imgs/" + user.profile_img)
     return render_template("account.html", user=user, profile_img=profile_img)
 
@@ -80,29 +79,29 @@ def account():
 def update():
     form = UpdateForm()
     if form.validate_on_submit():
-        if not form.any_updates(user=current_user):
+        if not form.any_updates(user=current_user): # type: ignore
             flash("Nothing to update.", "warning")
             return redirect(url_for("users.update"))
         updated = []
         with app.app_context():
-            user = User.query.filter_by(email=current_user.email).first()
+            user = User.query.filter_by(email=current_user.email).first() # type: ignore
             if form.picture.data:
-                pic = add_profile_pic(form.picture.data, user.username)
-                user.profile_img = pic
+                pic = add_profile_pic(form.picture.data, user.username) # type: ignore
+                user.profile_img = pic # type: ignore
                 updated.append("profile picture")
-            if form.username.data and form.username.data != user.username:
-                user.username = form.username.data
+            if form.username.data and form.username.data != user.username: # type: ignore
+                user.username = form.username.data # type: ignore
                 updated.append("username")
-            if form.email.data and form.email.data != user.email:
-                user.email = form.email.data
+            if form.email.data and form.email.data != user.email: # type: ignore
+                user.email = form.email.data # type: ignore
                 updated.append("email")
             app.logger.info("Commiting changes")
             db.session.commit()
         flash(f"Account updated succesfully. Updated {', '.join(updated)}.", "success")
         return redirect(url_for("users.account"))
     elif request.method == "GET":
-        form.username.data = current_user.username
-        form.email.data = current_user.email
+        form.username.data = current_user.username # type: ignore
+        form.email.data = current_user.email # type: ignore
     return render_template("update.html", form=form)
 
 
@@ -124,6 +123,6 @@ def posts(username):
 @users.route("/logout")
 @login_required
 def logout():
-    flash(f"You have been loged out from {current_user.username}.", "danger")
+    flash(f"You have been loged out from {current_user.username}.", "danger") # type: ignore
     logout_user()
     return redirect(url_for("core.index"))

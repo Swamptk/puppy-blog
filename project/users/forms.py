@@ -9,7 +9,7 @@ from project import app, db
 
 
 class LoginForm(FlaskForm):
-    # TODO: Does this already check if the text is an Email?
+    # ? Does this already check if the text is an Email?
     email = EmailField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Log In")
@@ -67,8 +67,6 @@ class UpdateForm(FlaskForm):
             and self.username.data == user.username
             and not self.picture.data
         ):
-            print(self.picture.data, flush=True)
             return False
         else:
-            print(f"{self.email.data = } | {self.username.data = } | {self.picture.data = }", flush=True)
             return True
