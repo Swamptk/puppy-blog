@@ -41,6 +41,16 @@ class User(TimedBase, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+    def json(self):
+        return {
+            "user_id" : self.id,
+            "username": self.username,
+            "email": self.email,
+            "profile_img": self.profile_img,
+            "created_at" : self.created_at,
+            "posts": len(self.posts)
+        }
 
 
 class BlogPost(TimedBase):
