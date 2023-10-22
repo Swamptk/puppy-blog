@@ -5,33 +5,41 @@ from project.users.picture_handler import picture_from_url
 from project import db
 from datetime import datetime
 
-class UserPostsApi(Resource):
 
+class UserPostsApi(Resource):
     def get(self, username):
         user: User = User.query.filter_by(username=username).one_or_404()
-        posts: list[BlogPost] = BlogPost.query.filter_by(user_id = user.id).all()
+        posts: list[BlogPost] = BlogPost.query.filter_by(user_id=user.id).all()
         if len(posts) == 0:
-            return jsonify({"info":"user has no posts yet"})
+            return jsonify({"info": "user has no posts yet"})
         return jsonify([post.json() for post in posts])
 
-class ManageUsers(Resource):
-    def get(self,username):
-        user = User.query.filter_by(username=username).one_or_404()
-        
+
+class ManageUsersApi(Resource):
+    def get(self, username):
+        user: User = User.query.filter_by(username=username).one_or_404()
+        return jsonify(user.json())
+
+    def delete(self, username):
+        user: User = User.query.filter_by(username=username).one_or_404()
+        db.session.delete(user)
+        db.session.commit()
+        return jsonify({"Success": "Deleted successfully."})
+
 
 class CreateUserApi(Resource):
     def post(self):
         json: dict | None = request.json
         if not json:
-            return jsonify({"error":"no data provided"}), 404
-        username = json.get('username')
-        email = json.get('email')
-        password = json.get('password')
-        picture_url = json.get('thumbnail')
-        created_at = json.get('created_at')
-        
+            return jsonify({"error": "no data provided"}), 404
+        username = json.get("username")
+        email = json.get("email")
+        password = json.get("password")
+        picture_url = json.get("picture_url")
+        created_at = json.get("created_at")
+
         if username and email and password:
-            user = User(email,username,password)
+            user = User(email, username, password)
         else:
             return jsonify({"error": "must provide username, email and password"})
 
@@ -41,11 +49,16 @@ class CreateUserApi(Resource):
 
         if created_at:
             try:
-                date = datetime.strptime(created_at,"%Y-%m-%d %H:%M:%S")
+                date = datetime.strptime(created_at, "%Y-%m-%d %H:%M:%S")
             except ValueError:
-                return jsonify({"error":"date format was not valid.", "format": "%Y-%m-%d %H:%M:%S"})
+                return jsonify(
+                    {
+                        "error": "date format was not valid.",
+                        "format": "%Y-%m-%d %H:%M:%S",
+                    }
+                )
             user.created_at = date
-        
+
         db.session.add(user)
         db.session.commit()
-        return jsonify("")
+        return jsonify({"Success": "User created successfully", "user": user.json()})

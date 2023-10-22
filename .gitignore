@@ -2,4 +2,6 @@
 **/__pycache__
 crud.ipynb
 **/static/profile_imgs/*.jpg
+**/static/profile_imgs/*.png
 project/database.db
+generated_users.txt

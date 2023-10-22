@@ -39,10 +39,11 @@ app.register_blueprint(blog_posts)
 app.register_blueprint(error_pages)
 
 ##### API
-from project.api import UserPostsApi,CreateUserApi
+from project.api import UserPostsApi,CreateUserApi, ManageUsersApi
 api = Api(app)
 api.add_resource(UserPostsApi, "/api/getuserposts/<username>")
 api.add_resource(CreateUserApi, "/api/createuser")
+api.add_resource(ManageUsersApi, "/api/<username>")
 
 ##### Create DB
 with app.app_context():

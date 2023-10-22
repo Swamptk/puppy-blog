@@ -30,7 +30,7 @@ def parse_user_json(json: dict):
         "username": user_data.get("username"),
         "password": user_data.get("password"),
         "created_at": user_data.get("created_at"),
-        "picture_url": user_data.get("picture_url"),
+        # "picture_url": user_data.get("picture_url"),
     }
 
 def generate_user(user: dict, url: str):
@@ -44,5 +44,7 @@ if __name__ == "__main__":
     for result in results:
         user = parse_user_json(result)
         response = generate_user(user, url)
+        with open("generated_users.txt", "a") as f:
+            f.write(f"{user['email']}, {user['password']} \n")
         print(response)
     
