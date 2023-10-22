@@ -8,13 +8,16 @@ from project.models import User
 from project import app, db
 
 
+# The `LoginForm` class represents a form with an email field, a password field, and a submit button
+# for logging in, with validation for required fields.
 class LoginForm(FlaskForm):
-    # ? Does this already check if the text is an Email?
+    # ? Does this already check if the text is an Email? ✅
     email = EmailField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Log In")
 
 
+# The RegistrationForm class is a FlaskForm used for user registration.
 class RegistrationForm(FlaskForm):
     username = StringField("UserName", validators=[DataRequired()])
     email = EmailField("Email", validators=[DataRequired()])
@@ -39,25 +42,12 @@ class RegistrationForm(FlaskForm):
                 raise ValidationError("Your username is already registered!")
 
 
+# The UpdateForm class is a FlaskForm used for updating user data.
 class UpdateForm(FlaskForm):
     username = StringField("UserName")
     email = EmailField("Email")
     picture = FileField("Profile Picture", validators=[FileAllowed(["jpg", "png"])])
     submit = SubmitField("Update")
-
-    # def validate_email(self, email):
-    #     if self.email.data:
-    #         with Session() as s:
-    #             if s.query(User).filter_by(email=self.email.data).first():
-    #                 print("Validation error", flush=True)
-    #                 raise ValidationError("Your email is already registered!")
-
-    # def validate_username(self, username):
-    #     if self.username.data:
-    #         with Session() as s:
-    #             if s.query(User).filter_by(username=self.username.data).first():
-    #                 print("Validation error", flush=True)
-    #                 raise ValidationError("Your username is already registered!")
 
     def any_updates(self, user: User):
         if not self.email.data and not self.username.data and not self.picture.data:

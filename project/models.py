@@ -11,12 +11,21 @@ class TimedBase(db.Model):
 
 
 @login_manager.user_loader
-def load_user(user_id):
+def load_user(user_id: int):
+    """
+    The function `load_user` loads a user from the database based on their user ID.
+    
+    :param user_id: The user_id parameter is the unique identifier of the user that we want to load from
+    the database
+    :return: the user object with the specified user_id.
+    """
     with app.app_context():
-        user = User.query.filter_by(id=user_id).first()
+        user: User | None = User.query.filter_by(id=user_id).first()
     return user
 
 
+# The `User` class represents a user in a web application, with attributes such as email, username,
+# password, and profile image.
 class User(TimedBase, UserMixin):
     __tablename__ = "users"
 
@@ -40,9 +49,18 @@ class User(TimedBase, UserMixin):
         return f"{self.__class__.__name__}: {self.username} | email: {self.email}"
 
     def check_password(self, password):
+        """
+        The function is used to check the validity of a password.
+        
+        :param password: The `password` parameter is a string that represents the password that needs to be
+        checked
+        """
         return check_password_hash(self.password_hash, password)
     
     def json(self):
+        """
+        The function is used to convert User data to JSON format.
+        """
         return {
             "user_id" : self.id,
             "username": self.username,
@@ -71,6 +89,9 @@ class BlogPost(TimedBase):
         return f"{self.__class__.__name__}: Title: {self.title} | Created at: {self.created_at}\n{self.text}"
     
     def json(self):
+        """
+        The function is used to convert BlogPost data to JSON format.
+        """
         return {
             "author": self.author.username,
             "created_at": self.created_at,
