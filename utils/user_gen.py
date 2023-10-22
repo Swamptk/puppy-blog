@@ -52,19 +52,19 @@ def parse_user_json(json: dict) -> dict[str, str | None]:
     }
 
 
-def generate_user(user: dict[str, str | None], url: str) -> requests.Response:
+def generate_user(user: dict[str, str | None], base_url: str) -> requests.Response:
     """
     The function generates a user by sending a POST request to a specified URL with user data in JSON
     format.
 
     :param user: A dictionary containing the user information to be sent in the request body
-    :param url: The `url` parameter is a string that represents the base URL of the API endpoint where
+    :param base_url: The `base_url` parameter is a string that represents the base URL of the API endpoint where
     the user will be created. It should include the protocol (e.g., "http://" or "https://") and the
     domain name (e.g., "example.com")
     :return: the response from the POST request made to the specified URL with the user data as JSON.
     """
-    url = url + "/api/createuser"
-    response = requests.post(url, json=user)
+    base_url = base_url + "/api/createuser"
+    response = requests.post(base_url, json=user)
     return response
 
 def create_users(base_url: str, n_users: int):

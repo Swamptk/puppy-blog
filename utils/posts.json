@@ -1,0 +1,64 @@
+{
+    "posts": [
+        {
+            "title": "Los beneficios de adoptar una mascota",
+            "text": "Adoptar una mascota no solo te brinda compañía, sino que también puede mejorar tu salud física y emocional. Los animales adoptados a menudo muestran una gratitud especial y se convierten en miembros queridos de la familia. ¡Anímate a adoptar!",
+            "created_at": "2023-10-22 12:15:00"
+        },
+        {
+            "title": "Cómo elegir el mejor alimento para tu gato",
+            "text": "La elección del alimento adecuado es crucial para la salud de tu felino. Consulta con tu veterinario y busca opciones de alta calidad.",
+            "created_at": "2023-03-10 09:24:56"
+        },
+        {
+            "title": "Razas de perros ideales para familias",
+            "text": "Si buscas una mascota familiar, considera razas como el Labrador Retriever o el Beagle. Son amigables y juguetonas.",
+            "created_at": "2023-05-15 14:37:21"
+        },
+        {
+            "title": "Consejos para adiestrar a tu perro",
+            "text": "El adiestramiento es esencial para una convivencia armoniosa. Utiliza refuerzos positivos y sé paciente con tu perro.",
+            "created_at": "2023-07-20 18:51:03"
+        },
+        {
+            "title": "Cómo preparar a tu mascota para una mudanza",
+            "text": "Las mascotas pueden estresarse durante una mudanza. Asegúrate de mantener la rutina y proporcionar un espacio seguro.",
+            "created_at": "2023-09-05 21:13:45"
+        },
+        {
+            "title": "Consejos para entrenar a tu cachorro",
+            "text": "El adiestramiento temprano es esencial para garantizar que tu cachorro se convierta en un perro bien educado. Aprende cómo establecer rutinas, reforzar comandos básicos y premiar el buen comportamiento.",
+            "created_at": "2023-10-18 14:30:00"
+        },
+        {
+            "title": "Cómo elegir el mejor alimento para tu gato",
+            "text": "Seleccionar la comida adecuada para tu gato es crucial para su salud y bienestar. Considera factores como la edad, el peso y las necesidades dietéticas especiales de tu felino para tomar la decisión correcta.",
+            "created_at": "2023-10-22 09:00:00"
+        },
+        {
+            "title": "Beneficios de adoptar una mascota rescatada",
+            "text": "La adopción de una mascota rescatada no solo cambia la vida del animal, sino también la tuya. Descubre los beneficios de darle un hogar a un animal necesitado y cómo puedes contribuir al bienestar de la comunidad.",
+            "created_at": "2023-10-15 11:45:00"
+        },
+        {
+            "title": "Cómo elegir el mejor alimento para tu gato",
+            "text": "Encontrar el alimento adecuado para tu gato es crucial para su salud y bienestar. Considera la edad, nivel de actividad y posibles alergias al seleccionar la comida. Siempre consulta con tu veterinario para obtener recomendaciones personalizadas.",
+            "created_at": "2021-02-14 10:15:22"
+        },
+        {
+            "title": "Consejos para entrenar a tu cachorro",
+            "text": "El adiestramiento es esencial para un cachorro feliz y equilibrado. Mantén las sesiones cortas, utiliza refuerzos positivos y se paciente. Recuerda que la consistencia es clave. ¡Celebra los logros de tu cachorro y disfruta del proceso!",
+            "created_at": "2020-09-30 14:47:08"
+        },
+        {
+            "title": "Preparando a tu perro para un viaje en coche",
+            "text": "Si planeas viajar con tu perro, es importante prepararlo para el viaje en coche. Asegúrate de que esté cómodo y seguro en el automóvil. Haz paradas regulares para que pueda estirar las piernas y nunca lo dejes dentro del coche sin supervisión.",
+            "created_at": "2019-07-12 21:36:55"
+        },
+        {
+            "title": "Juegos interactivos para entretener a tu conejo",
+            "text": "Los conejos son mascotas inteligentes y curiosas que disfrutan de la estimulación mental. Proporciona juguetes interactivos y esconde golosinas para mantener a tu conejo entretenido. ¡Verás cómo se divierte explorando su entorno!",
+            "created_at": "2018-04-25 05:58:39"
+        }
+    ]
+}

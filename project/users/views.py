@@ -107,7 +107,7 @@ def update():
 
 
 @users.route("/<username>")
-@login_required
+# @login_required
 def posts(username):
     page = request.args.get("page", 1, int)
     with app.app_context():
