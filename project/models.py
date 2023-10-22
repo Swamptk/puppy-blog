@@ -29,7 +29,7 @@ class User(TimedBase, UserMixin):
     )
     username: Mapped[str] = mapped_column(String(64), unique=True, index=True)
     password_hash: Mapped[str] = mapped_column(String(128))
-    posts: Mapped[list["BlogPost"]] = relationship(back_populates="author")
+    posts: Mapped[list["BlogPost"]] = relationship(back_populates="author", passive_deletes=True)
 
     def __init__(self, email, username, password):
         self.email = email
@@ -57,7 +57,7 @@ class BlogPost(TimedBase):
     __tablename__ = "blogposts"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id', ondelete="CASCADE"), nullable=False)
     title: Mapped[str] = mapped_column(String(128),nullable=False)
     text: Mapped[str] = mapped_column(nullable=False)
     author: Mapped["User"] = relationship(back_populates="posts")
