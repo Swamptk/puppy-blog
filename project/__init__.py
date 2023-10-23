@@ -16,6 +16,7 @@ db = SQLAlchemy(model_class=Base)
 
 ##### App
 app = Flask(__name__)
+#! Change this
 app.config['SECRET_KEY'] = "mysecretkey"
 app.config['SQLALCHEMY_DATABASE_URI'] = db_path
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
